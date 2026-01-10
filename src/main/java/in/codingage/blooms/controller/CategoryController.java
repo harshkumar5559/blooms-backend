@@ -1,17 +1,14 @@
 package in.codingage.blooms.controller;
 
-import ch.qos.logback.core.testUtil.RandomUtil;
 import in.codingage.blooms.Database;
 import in.codingage.blooms.dto.CategoryRequest;
 import in.codingage.blooms.dto.CategoryResponse;
 import in.codingage.blooms.models.Category;
 import in.codingage.blooms.models.Status;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.*;
-import java.util.function.Supplier;
-import java.util.random.RandomGenerator;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryController {
 
@@ -36,6 +33,7 @@ public class CategoryController {
 
         category.setCreatedDTTM(LocalDateTime.now());
 
+        // local db - item save
         Database database = Database.getInstance();
         database.getCategoryList().add(category);
     }
@@ -72,18 +70,48 @@ public class CategoryController {
         }
 
      public boolean deleteCategory(String categoryId){
-        // iterate the list that comes from your database and set the active falg to false
+        // iterate the list that comes from your database and set the active flag to false
          // return true
          // if id not found, return false
 
-         return true;
+         List<Category> categoryList = Database.getInstance().getCategoryList();
+
+         for(Category cat : categoryList){
+             if(cat.getId().equals(categoryId)){
+                 // hard delete
+//                 categoryList.remove(cat)
+                 // soft delete [db hai, you have status field which is inactive]
+                 cat.setActive(false);
+                 return true;
+             }
+         }
+         return false;
      }
 
      public CategoryResponse updateCategory(CategoryRequest categoryRequest){
-        // fetch ctegory by id and update its' name, desc and curl using category request
-         // make sure you are updating the found category and the list..
-         // return updated category
-         return null;
+        // fetch category by id and update its name, desc and curl using category request
+         // validation to return from here only if id is not present
+         CategoryResponse categoryResponse = new CategoryResponse();
+         if(categoryRequest.getId() == null){
+             // we will send error to UI later
+             return categoryResponse;
+         }
+         List<Category> categoryResponses = Database.getInstance().getCategoryList();
+
+         for(Category category : categoryResponses){
+             if(category.getId().equals(categoryRequest.getId())){
+                 category.setName(categoryRequest.getTitle());
+                 category.setDescription(categoryRequest.getDesc());
+                 category.setImageUrl(categoryRequest.getcUrl());
+                 // create a category response object
+                 categoryResponse.setDesc(category.getDescription());
+                 categoryResponse.setId(category.getId());
+                 categoryResponse.setcUrl(category.getImageUrl());
+                 categoryResponse.setTitle(category.getName());
+                 return categoryResponse;
+             }
+         }
+         return categoryResponse;
      }
     }
 

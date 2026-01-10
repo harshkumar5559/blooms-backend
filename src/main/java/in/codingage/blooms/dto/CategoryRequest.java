@@ -6,6 +6,10 @@ public class CategoryRequest {
     private String desc;
     private String cUrl;
 
+    public String getId() {
+        return id;
+    }
+
     public CategoryRequest(String title, String desc, String cUrl) {
         this.title = title;
         this.desc = desc;
