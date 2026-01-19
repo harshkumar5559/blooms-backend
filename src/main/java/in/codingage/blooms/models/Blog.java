@@ -1,9 +1,16 @@
 package in.codingage.blooms.models;
 
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.sql.Timestamp;
 import java.util.List;
-
+@Table(name = "blog")
+@Entity
 public class Blog {
+    @Id
     private String id;
 
     private String title;
@@ -18,7 +25,18 @@ public class Blog {
 
     private Timestamp createdDTTM;
 
+    private String categoryId;
+
+    @ElementCollection
     private List<CategoryMapping> categoryMappings;
+
+    private boolean active;
+
+    private String AuthorName;
+
+    private String SubCategoryId;
+
+    private String CreatedBy;
 
     public String getId() {
         return id;
@@ -76,6 +94,14 @@ public class Blog {
         this.createdDTTM = createdDTTM;
     }
 
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public List<CategoryMapping> getCategoryMappings() {
         return categoryMappings;
     }
@@ -83,4 +109,37 @@ public class Blog {
     public void setCategoryMappings(List<CategoryMapping> categoryMappings) {
         this.categoryMappings = categoryMappings;
     }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getAuthorName() {
+        return AuthorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        AuthorName = authorName;
+    }
+
+    public String getSubCategoryId() {
+        return SubCategoryId;
+    }
+
+    public void setSubCategoryId(String subCategoryId) {
+        SubCategoryId = subCategoryId;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
 }
+

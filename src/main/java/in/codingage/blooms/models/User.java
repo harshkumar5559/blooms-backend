@@ -1,5 +1,13 @@
 package in.codingage.blooms.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import java.sql.Timestamp;
+
+@Table(name = "User")
+@Entity
 public class User {
     private String id;
     private String username;
@@ -7,9 +15,39 @@ public class User {
     private String name;
     private String profileUrl;
     private String password;
+    private boolean active;
+    private String role;
+    private String createdBy;
+    private Timestamp createdDTTM;
+
+    @Id
 
     public String getId() {
         return id;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Timestamp getCreatedDTTM() {
+        return createdDTTM;
+    }
+
+    public void setCreatedDTTM(Timestamp createdDTTM) {
+        this.createdDTTM = createdDTTM;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setId(String id) {
@@ -54,5 +92,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
