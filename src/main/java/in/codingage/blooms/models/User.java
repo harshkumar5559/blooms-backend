@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 
 import java.sql.Timestamp;
 
-@Table(name = "User")
+@Table(name = "Users")
 @Entity
 public class User {
     private String id;
@@ -21,7 +21,7 @@ public class User {
     private Timestamp createdDTTM;
 
     @Id
-
+    
     public String getId() {
         return id;
     }
