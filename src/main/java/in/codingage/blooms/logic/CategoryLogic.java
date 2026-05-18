@@ -1,7 +1,6 @@
 package in.codingage.blooms.logic;
 
 import in.codingage.blooms.models.Category;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,28 +9,29 @@ public class CategoryLogic {
     private List<Category> categories = new ArrayList<>();
 
     public List<Category> getCategories() {
-        createCategory();
+        if(categories.isEmpty()) { // ताकि बार-बार लिस्ट डुप्लिकेट न हो
+            createCategory();
+        }
         return categories;
     }
 
-    // create category
-
-
     public void createCategory() {
+        // ✅ पहली कैटेगरी
         Category category = new Category();
         category.setName("Technology");
         category.setId("cat001");
         categories.add(category);
+
+        // ✅ दूसरी कैटेगरी (categoryB वेरिएबल का सही इस्तेमाल)
         Category categoryB = new Category();
-        category.setName("Health");
-        category.setId("cat002");
-        categories.add(category);
+        categoryB.setName("Health");
+        categoryB.setId("cat002");
+        categories.add(categoryB);
+
+        // ✅ तीसरी कैटेगरी (categoryC वेरिएबल का सही इस्तेमाल)
         Category categoryC = new Category();
-        category.setName("Politics");
-        category.setId("cat003");
-        categories.add(category);
+        categoryC.setName("Politics");
+        categoryC.setId("cat003");
+        categories.add(categoryC);
     }
-
-
-
 }

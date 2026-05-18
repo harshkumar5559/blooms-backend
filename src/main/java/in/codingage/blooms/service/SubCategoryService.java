@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubCategoryService {
@@ -18,9 +19,30 @@ public class SubCategoryService {
         return subCategoryRepository.save(subCategory);
     }
 
-    //Get By Category Id
-    public List<SubCategory> getSubCategoriesByCategory(String categoryId){
-        return subCategoryRepository.findByCategoryId(categoryId);
+    //get All
+    public List<SubCategory> getAll(){
+        return subCategoryRepository.findAll();
+    }
+
+
+
+    //Get subcategories By Category Id
+    public List<SubCategory> getByCategoryId(String categoryId){
+        return
+                subCategoryRepository.findByCategoryId(categoryId);
+    }
+
+    //update
+    public SubCategory updateSubCategory(String id,SubCategory updatedSubcategory){
+        Optional<SubCategory>optionalSubCategory=subCategoryRepository.findById(id);
+        if(optionalSubCategory.isPresent()){
+            SubCategory existingSubCategory=optionalSubCategory.get();
+            existingSubCategory.setName(updatedSubcategory.getName());
+            existingSubCategory.setCategoryId(updatedSubcategory.getCategoryId());
+            return subCategoryRepository.save(existingSubCategory);
+        }
+        return null;
+
     }
 
     //Delete
@@ -32,8 +54,5 @@ public class SubCategoryService {
         return false;
     }
 
-    //get All
-    public List<SubCategory> getAll(){
-        return subCategoryRepository.findAll();
-    }
+
 }

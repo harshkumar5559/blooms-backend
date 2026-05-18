@@ -1,7 +1,6 @@
 package in.codingage.blooms.dto;
 
 public class CategoryResponse {
-    public static Object set;
     private String id;
     private String title;
     private String desc;

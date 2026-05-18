@@ -1,19 +1,20 @@
 package in.codingage.blooms.models;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.sql.Timestamp;
 import java.util.List;
-@Table(name = "blog")
-@Entity
+@Document(collection ="blog")
 public class Blog {
     @Id
     private String id;
 
     private String title;
+
+
+
 
     private String description;
 
@@ -27,7 +28,9 @@ public class Blog {
 
     private String categoryId;
 
-    @ElementCollection
+    private String ImageUrl;
+
+
     private List<CategoryMapping> categoryMappings;
 
     private boolean active;
@@ -141,5 +144,14 @@ public class Blog {
     public void setCreatedBy(String createdBy) {
         CreatedBy = createdBy;
     }
+
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
+    }
+
 }
 

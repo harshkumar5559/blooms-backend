@@ -1,13 +1,12 @@
 package in.codingage.blooms.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.sql.Timestamp;
 
-@Table(name = "Users")
-@Entity
+@Document(collection = "Users")
 public class User {
     private String id;
     private String username;
@@ -19,6 +18,7 @@ public class User {
     private String role;
     private String createdBy;
     private Timestamp createdDTTM;
+    private String status;
 
     @Id
     
@@ -100,5 +100,13 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

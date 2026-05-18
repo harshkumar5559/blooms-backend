@@ -1,13 +1,16 @@
 package in.codingage.blooms.repository;
 
+
 import in.codingage.blooms.models.SubCategory;
-import org.springframework.data.domain.Example;
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface SubCategoryRepository extends JpaRepository<SubCategory,String> {
-    List<SubCategory>findByCategoryId(String categoryId);
+public interface  SubCategoryRepository extends MongoRepository<SubCategory, String> {
+
+    List<SubCategory> findByCategoryId(String categoryId);
+
 }

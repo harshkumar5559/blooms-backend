@@ -1,12 +1,11 @@
 package in.codingage.blooms.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.sql.Timestamp;
-@Table(name = "SubCategory")
-@Entity
+@Document(collection = "SubCategory")
 public class SubCategory {
     @Id
     private String id;

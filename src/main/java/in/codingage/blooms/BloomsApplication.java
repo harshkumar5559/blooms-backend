@@ -2,10 +2,10 @@ package in.codingage.blooms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 
 //annotation
-@EnableJpaRepositories(basePackages = "in.codingage.blooms.repository")
+
 @SpringBootApplication
 public class BloomsApplication {
 
