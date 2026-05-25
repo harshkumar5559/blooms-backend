@@ -1,8 +1,6 @@
 package in.codingage.blooms.Security;
 
-// 🌟 तुम्हारे प्रोजेक्ट में जो असली फाइल है, उसे इम्पोर्ट किया है
 import in.codingage.blooms.Security.JwtFilter;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +18,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // 🌟 केवल JwtFilter को ऑटोवायर किया जो तुम्हारे पास पहले से मौजूद है
     @Autowired
     private JwtFilter filter;
 
@@ -30,19 +27,18 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Swagger URLs allow
+                        // Swagger UI allow
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                         // Auth URLs allow
                         .requestMatchers("/auth/**").permitAll()
                         // AI endpoint allow
                         .requestMatchers("/ai/**").permitAll()
-                        // 🌟 ब्लॉग का रास्ता पूरी तरह से गेटकीपर से बाहर (403 एरर खत्म!)
+                        // ब्लॉग का रास्ता भी खोल दिया भाई
                         .requestMatchers("/api/v1/blog/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        // तुम्हारा असली फ़िल्टर यहाँ सेट कर दिया
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
